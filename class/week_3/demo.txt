@@ -1,0 +1,116 @@
+ryanpan@RyanPanPC /Volumes/MyWorks/D_Data/teaching/110/Python/week 04 list & exception/week04_quiz$ python3 main.py                                                                                                                                                      
+
+0. Add a student's name and score
+1. Delete a student
+2. Modify a student's score
+3. Print all
+4. Exit
+Please select: 0
+  Please input a student's name: test1
+  Please input test1's score: 30
+    Add [test1, 30.0] success
+
+0. Add a student's name and score
+1. Delete a student
+2. Modify a student's score
+3. Print all
+4. Exit
+Please select: 0
+  Please input a student's name: test2
+  Please input test2's score: 40
+    Add [test2, 40.0] success
+
+0. Add a student's name and score
+1. Delete a student
+2. Modify a student's score
+3. Print all
+4. Exit
+Please select: 3
+[['test1', 30.0], ['test2', 40.0]]
+
+0. Add a student's name and score
+1. Delete a student
+2. Modify a student's score
+3. Print all
+4. Exit
+Please select: 1
+  Please input a student's name: test3
+    The name test3 is not found
+
+0. Add a student's name and score
+1. Delete a student
+2. Modify a student's score
+3. Print all
+4. Exit
+Please select: 2
+  Please input a student's name: test3
+    The name test3 is not found
+
+0. Add a student's name and score
+1. Delete a student
+2. Modify a student's score
+3. Print all
+4. Exit
+Please select: 1
+  Please input a student's name: test2
+    Del test2 success
+
+0. Add a student's name and score
+1. Delete a student
+2. Modify a student's score
+3. Print all
+4. Exit
+Please select: 2
+  Please input a student's name: test1
+  Please input test1's new score: 99
+    Modify [test1, 99.0] success
+
+0. Add a student's name and score
+1. Delete a student
+2. Modify a student's score
+3. Print all
+4. Exit
+Please select: 3
+[['test1', 99.0]]
+
+0. Add a student's name and score
+1. Delete a student
+2. Modify a student's score
+3. Print all
+4. Exit
+Please select: 4
+ryanpan@RyanPanPC /Volumes/MyWorks/D_Data/teaching/110/Python/week 04 list & exception/week04_quiz$ python3 main.py                                                                                                                                                      
+
+0. Add a student's name and score
+1. Delete a student
+2. Modify a student's score
+3. Print all
+4. Exit
+Please select: 3
+[['test1', 99.0]]
+
+0. Add a student's name and score
+1. Delete a student
+2. Modify a student's score
+3. Print all
+4. Exit
+Please select: 0
+  Please input a student's name: test3
+  Please input test3's score: 100
+    Add [test3, 100.0] success
+
+0. Add a student's name and score
+1. Delete a student
+2. Modify a student's score
+3. Print all
+4. Exit
+Please select: 3
+[['test1', 99.0], ['test3', 100.0]]
+
+0. Add a student's name and score
+1. Delete a student
+2. Modify a student's score
+3. Print all
+4. Exit
+Please select: 4
+ryanpan@RyanPanPC /Volumes/MyWorks/D_Data/teaching/110/Python/week 04 list & exception/week04_quiz$                                                                                                                                                                      
