@@ -14,7 +14,12 @@ def main():
     }
     while select_result != 4:  # call main functions in add_stu, del_stu, modify_stu, print_all here
         select_result = print_menu()
-        function_dic[select_result](student_list)
+        try:
+            function_dic[select_result](student_list)
+        except KeyError:
+            print("please input 1~4 number")
+            pass
+
     print("restore student file")
     restore_student_file(student_list)
 
@@ -37,17 +42,19 @@ def restore_student_file(student_list):  # restore student list to file here
 
 
 def print_menu():
-    print()
-    print("0. Add a student's name and score")
-    print("1. Delete a student")
-    print("2. Modify a student's score")
-    print("3. Print all")
-    print("4. Exit")
-    try:
-        selection = int(input("Please select: "))
-    except TypeError:
-        print("please enter numbers(int)")
-    return selection
+    while True:
+        print()
+        print("0. Add a student's name and score")
+        print("1. Delete a student")
+        print("2. Modify a student's score")
+        print("3. Print all")
+        print("4. Exit")
+        try:
+            selection = int(input("Please select: "))
+            return selection
+        except ValueError:
+            print("please enter numbers(int)")
+            pass
 
 
 main()
