@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    webpage_title = "walker's first flask"
-    return render_template("index.html", title=webpage_title)
+    paragraphs = ["section 1", "section 2", "section 3"]
+    return render_template("index.html", title="Home page", data=paragraphs)
 
 
 if __name__ == '__main__':

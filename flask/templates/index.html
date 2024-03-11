@@ -4,25 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title %}
     <title>{{title}}</title>
-    <style>
-        body {
-            background-color: black;
-        }
-
-        .head_word {
-            color: white;
-        }
-
-        .p_word {
-            color: white;
-        }
-    </style>
+    {% else %}
+    <title>Flask App</title>
+    {% endif %}
 </head>
 
 <body>
     <h1 class="head_word">Hello world</h1>
-    <p class="p_word">Flask is amazing</p>
+    {% for p in data %}
+    <p>{{ p }}</p>
+    {% endfor %}
 </body>
 
 </html>
