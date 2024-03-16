@@ -1,0 +1,251 @@
+
+*** Design student list data structure by yourself ***
+
+
+ryanpan@RyanPanPC /Volumes/MyWorks/D_Data/teaching/110/Python/week 05 string & dictionary/week05_quiz$ python3 main.py                                                                                                                                              1 ↵  
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: show
+
+==== student list ====
+
+======================
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: add
+  Please input a student's name or exit: Bill
+  Please input a subject name or exit for ending: Python 
+  Please input Bill's Python score or < 0 for discarding the subject: 80 
+  Please input a subject name or exit for ending: Chinese
+  Please input Bill's Chinese score or < 0 for discarding the subject: jjj
+    Wrong format with reason could not convert string to float: 'jjj', try again
+  Please input Bill's Chinese score or < 0 for discarding the subject: -8
+  Please input a subject name or exit for ending: English
+  Please input Bill's English score or < 0 for discarding the subject: 90
+  Please input a subject name or exit for ending: exit
+    Add Bill's scores successfully
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: show
+
+==== student list ====
+
+Name: Bill
+  subject: Python, score: 80.0
+  subject: English, score: 90.0
+
+======================
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: add
+  Please input a student's name or exit: Bill
+    Bill already exists
+  Please input a student's name or exit: Kevin
+  Please input a subject name or exit for ending: Python
+  Please input Kevin's Python score or < 0 for discarding the subject: 100
+  Please input a subject name or exit for ending: exit
+    Add Kevin's score successfully
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: show
+
+==== student list ====
+
+Name: Bill
+  subject: Python, score: 80.0
+  subject: English, score: 90.0
+
+Name: Kevin
+  subject: Python, score: 100.0
+
+======================
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: modify
+  Please input a student's name or exit: Kevin
+  current subjects are Python 
+
+  Please input a subject you want to change: Chinese
+  Add a new subject for Kevin please input Chinese score or < 0 for discarding the subject: 80
+  Add successfully
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: show
+
+==== student list ====
+
+Name: Bill
+  subject: Python, score: 80.0
+  subject: English, score: 90.0
+
+Name: Kevin
+  subject: Python, score: 100.0
+  subject: Chinese, score: 80.0
+
+======================
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: modify
+  Please input a student's name or exit: Kevin
+  current subjects are Python Chinese 
+
+  Please input a subject you want to change: english
+  Add a new subject for Kevin please input english score or < 0 for discarding the subject: -9
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: modify
+  Please input a student's name or exit: Kevin
+  current subjects are Python Chinese 
+
+  Please input a subject you want to change: Python
+  Please input Python's new score of Kevin: 80
+    Modify [Kevin, Python, 80.0] success
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: show
+
+==== student list ====
+
+Name: Bill
+  subject: Python, score: 80.0
+  subject: English, score: 90.0
+
+Name: Kevin
+  subject: Python, score: 80.0
+  subject: Chinese, score: 80.0
+
+======================
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: del
+  Please input a student's name or exit: test
+    The name test is not found
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: del
+  Please input a student's name or exit: Kevin
+    Del Kevin success
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: show
+
+==== student list ====
+
+Name: Bill
+  subject: Python, score: 80.0
+  subject: English, score: 90.0
+
+======================
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: exit
+ryanpan@RyanPanPC /Volumes/MyWorks/D_Data/teaching/110/Python/week 05 string & dictionary/week05_quiz$ python3 main.py                                                                                                                                                   
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: show
+
+==== student list ====
+
+Name: Bill
+  subject: Python, score: 80.0
+  subject: English, score: 90.0
+
+======================
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: add 
+  Please input a student's name or exit: Tom
+  Please input a subject name or exit for ending: Python
+  Please input Tom's Python score or < 0 for discarding the subject: 100
+  Please input a subject name or exit for ending: exit
+    Add Tom's score successfully
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: show
+
+==== student list ====
+
+Name: Bill
+  subject: Python, score: 80.0
+  subject: English, score: 90.0
+
+Name: Tom
+  subject: Python, score: 100.0
+
+======================
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: exit
+ryanpan@RyanPanPC /Volumes/MyWorks/D_Data/teaching/110/Python/week 05 string & dictionary/week05_quiz$                                                                                                                                                                   
