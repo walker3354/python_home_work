@@ -23,11 +23,11 @@ def main():
     print('welcom home {:>10}.I miss you'.format(name))
     print('welcom home {:^10}.I miss you'.format(name))
     '''
-    welcom home walker
-    welcom home walker    
-    welcom home walker    
-    welcom home     walker
-    welcom home   walker  
+    welcom home walker .I miss you
+    welcom home walker    .I miss you
+    welcom home walker    .I miss you
+    welcom home     walker.I miss you
+    welcom home   walker  .I miss you  
     '''
 
 
