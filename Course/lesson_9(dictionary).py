@@ -1,4 +1,4 @@
-# review set ->{} tuple ->{} list ->[]
+# review set ->{} tuple ->()  list ->[]
 # dictionary changeable
 capitials = {'Taiwan': 'Taipei', 'India': 'New Dehli', 'China': 'Beijing'}
 
