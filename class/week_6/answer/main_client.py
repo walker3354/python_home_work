@@ -8,8 +8,6 @@ host = "127.0.0.1"
 port = 20001
 BUFFER_SIZE = 1940
 
-action_list = {"add": AddStu, "show": PrintAll}
-
 
 class Socket_client:
 
@@ -17,6 +15,7 @@ class Socket_client:
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client_socket.connect((host, port))
         self.student_dict = StudentInfoProcessor().read_student_file()
+        self.action_list = {"add": AddStu, "show": PrintAll}
 
     def send_command(self, command, parameters):
         send_data = {'command': command, 'parameters': parameters}
@@ -39,7 +38,7 @@ class Socket_client:
         while select_result != "exit":
             select_result = self.print_menu()
             try:
-                self.student_dict, parameters = action_list[select_result](
+                self.student_dict, parameters = self.action_list[select_result](
                     self.student_dict).execute()
                 self.send_command(select_result, parameters)
             except Exception as e:

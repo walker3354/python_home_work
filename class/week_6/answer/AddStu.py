@@ -1,7 +1,7 @@
 class AddStu:
     def __init__(self, student_dict):
         self.student_dict = student_dict
-        self.parameters
+        self.parameters = dict()
 
     def execute(self):
         while True:
