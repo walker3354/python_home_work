@@ -25,9 +25,7 @@ class Socket_client:
 
     def wait_response(self):
         data = self.client_socket.recv(BUFFER_SIZE)
-        print('12')
         raw_data = data.decode()
-        print('12')
         print(raw_data)
         if raw_data == 'closing':
             return False
