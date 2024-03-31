@@ -40,7 +40,7 @@ class Socket_client:
                     self.student_dict).execute()
                 self.send_command(select_result, parameters)
             except Exception as e:
-                print(e)
+                print(f'{e} please try again!')
         StudentInfoProcessor().restore_student_file(self.student_dict)
 
     def print_menu(self):
@@ -51,11 +51,13 @@ class Socket_client:
         selection = input("Please select: ")
         return selection
 
+    def start_client(self):
+        keep_going = True
+        while keep_going:
+            self.select_func()
+            keep_going = self.wait_response()
+
 
 if __name__ == '__main__':
     client = Socket_client(host, port)
-
-    keep_going = True
-    while keep_going:
-        client.select_func()
-        keep_going = client.wait_response()
+    client.start_client()
