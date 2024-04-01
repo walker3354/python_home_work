@@ -26,7 +26,9 @@ class Socket_client:
     def wait_response(self):
         data = self.client_socket.recv(BUFFER_SIZE)
         raw_data = data.decode()
+        print('12')
         print(raw_data)
+        print('12')
         if raw_data == 'closing':
             return False
         return True
@@ -39,6 +41,7 @@ class Socket_client:
                 self.student_dict, parameters = self.action_list[select_result](
                     self.student_dict).execute()
                 self.send_command(select_result, parameters)
+                self.wait_response()
             except Exception as e:
                 print(f'{e} please try again!')
         StudentInfoProcessor().restore_student_file(self.student_dict)
@@ -51,13 +54,7 @@ class Socket_client:
         selection = input("Please select: ")
         return selection
 
-    def start_client(self):
-        keep_going = True
-        while keep_going:
-            self.select_func()
-            keep_going = self.wait_response()
-
 
 if __name__ == '__main__':
     client = Socket_client(host, port)
-    client.start_client()
+    client.select_func()
