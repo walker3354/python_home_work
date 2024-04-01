@@ -4,14 +4,14 @@ class AddStu:
         self.parameters = dict()
 
     def execute(self):
-        student_name = self.input_student_name()
-        self.input_subject(student_name)
+        self.input_student_name()
         return self.student_dict, self.parameters
 
     def input_student_name(self):
         while True:
             student_name = input("Please input a student's name or exit: ")
             if student_name == 'exit':
+                self.parameters = {'name': "", 'score': {}}
                 return
             if student_name in self.student_dict.keys():
                 print("{} already exists".format(student_name))
@@ -19,6 +19,7 @@ class AddStu:
             break
         self.student_dict[student_name] = {}
         self.parameters = {'name': student_name, 'score': {}}
+        self.input_subject(student_name)
         return student_name
 
     def input_subject(self, student_name):
