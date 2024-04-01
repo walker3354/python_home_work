@@ -19,6 +19,7 @@ class AddStu:
             break
         self.student_dict[student_name] = {}
         self.parameters = {'name': student_name, 'score': {}}
+        return student_name
 
     def input_subject(self, student_name):
         while True:
