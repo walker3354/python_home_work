@@ -1,23 +1,18 @@
 class AddStu:
-    def __init__(self, student_dict):
-        self.student_dict = student_dict
+    def __init__(self):
         # if you don't use this format the sever will fuxk up
         self.parameters = {'name': "", 'score': {}}
 
     def execute(self):
         self.input_student_name()
-        return self.student_dict, self.parameters
+        return self.parameters
 
     def input_student_name(self):
         while True:
             student_name = input("Please input a student's name or exit: ")
             if student_name == 'exit':
                 return
-            if student_name in self.student_dict.keys():
-                print("{} already exists".format(student_name))
-                continue
             break
-        self.student_dict[student_name] = {}
         self.parameters['name'] = student_name
         self.input_subject(student_name)
 
@@ -37,7 +32,6 @@ class AddStu:
                         "Please input {}'s {} score or < 0 for discarding the subject: ".format(student_name, subject_name)))
                 if subject_score < 0:
                     break
-                self.student_dict[student_name][subject_name] = subject_score
                 self.parameters['score'][subject_name] = subject_score
                 break
             except Exception as e:

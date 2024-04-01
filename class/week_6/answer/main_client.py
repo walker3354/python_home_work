@@ -1,6 +1,5 @@
 from AddStu import AddStu
 from PrintAll import PrintAll
-from StudentInfoProcessor import StudentInfoProcessor
 import socket
 import json
 
@@ -9,13 +8,49 @@ port = 20001
 BUFFER_SIZE = 1940
 
 
+class StdMenu:
+    def __init__(self):
+        self.action_list = {"add": self.add_student, "show": self.show_student}
+        self.socket = Socket_client(host, port)
+
+    def print_menu(self):
+        print()
+        print("add: Add a student's name and score")
+        print("show: Print all")
+        print("exit: Exit")
+        selection = input("Please select: ")
+        return selection
+
+    def select_func(self):
+        select_result = "initial"
+        while select_result != "exit":
+            select_result = self.print_menu()
+            try:
+                self.action_list[select_result]()
+            except Exception as e:
+                print(f'{e} please try again!')
+
+    def add_student(self):
+        parameters = AddStu().execute()
+        self.socket.send_command('add', parameters)
+        respone_data = self.socket.wait_response()
+        print(f"The client received data => {respone_data}")
+        if respone_data['status'] == 'OK':
+            print(f"Add {parameters} success")
+        else:
+            print(f"Add {parameters} fail")
+
+    def show_student(self):
+        self.socket.send_command('show', {})
+        history = self.socket.wait_response()["parameters"]
+        PrintAll().execute(history)
+
+
 class Socket_client:
 
     def __init__(self, host, port):
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client_socket.connect((host, port))
-        self.student_dict = StudentInfoProcessor().read_student_file()
-        self.action_list = {"add": AddStu, "show": PrintAll}
 
     def send_command(self, command, parameters):
         send_data = {'command': command, 'parameters': parameters}
@@ -26,35 +61,9 @@ class Socket_client:
     def wait_response(self):
         data = self.client_socket.recv(BUFFER_SIZE)
         raw_data = data.decode()
-        print('12')
-        print(raw_data)
-        print('12')
-        if raw_data == 'closing':
-            return False
-        return True
-
-    def select_func(self):
-        select_result = "initial"
-        while select_result != "exit":
-            select_result = self.print_menu()
-            try:
-                self.student_dict, parameters = self.action_list[select_result](
-                    self.student_dict).execute()
-                self.send_command(select_result, parameters)
-                self.wait_response()
-            except Exception as e:
-                print(f'{e} please try again!')
-        StudentInfoProcessor().restore_student_file(self.student_dict)
-
-    def print_menu(self):
-        print()
-        print("add: Add a student's name and score")
-        print("show: Print all")
-        print("exit: Exit")
-        selection = input("Please select: ")
-        return selection
+        return json.loads(raw_data)
 
 
 if __name__ == '__main__':
-    client = Socket_client(host, port)
+    client = StdMenu()
     client.select_func()
