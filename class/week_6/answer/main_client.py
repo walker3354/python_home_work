@@ -1,11 +1,10 @@
 from AddStu import AddStu
 from PrintAll import PrintAll
-import socket
+from Socket_client import Socket_client
 import json
 
 host = "127.0.0.1"
 port = 20001
-BUFFER_SIZE = 1940
 
 
 class StdMenu:
@@ -42,26 +41,10 @@ class StdMenu:
 
     def show_student(self):
         self.socket.send_command('show', {})
-        history = self.socket.wait_response()["parameters"]
+        respone_data = self.socket.wait_response()
+        print(f"The client received data => {respone_data}")
+        history = respone_data["parameters"]
         PrintAll().execute(history)
-
-
-class Socket_client:
-
-    def __init__(self, host, port):
-        self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.client_socket.connect((host, port))
-
-    def send_command(self, command, parameters):
-        send_data = {'command': command, 'parameters': parameters}
-        print(f"The client sent data => ('command': '{
-              command}'), ('parameters': {parameters})")
-        self.client_socket.send(json.dumps(send_data).encode())
-
-    def wait_response(self):
-        data = self.client_socket.recv(BUFFER_SIZE)
-        raw_data = data.decode()
-        return json.loads(raw_data)
 
 
 if __name__ == '__main__':
