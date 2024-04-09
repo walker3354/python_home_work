@@ -1,7 +1,6 @@
 from AddStu import AddStu
 from PrintAll import PrintAll
 from Socket_client import Socket_client
-import json
 
 host = "127.0.0.1"
 port = 20001
