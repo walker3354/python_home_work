@@ -25,9 +25,7 @@ class Std_storage:
         if student_name in self.student_dict.keys():
             return {'status': 'Fail', 'reason': 'The name already exists.'}
         else:
-            self.student_dict[student_name] = {}
-            for subject_name, subject_score in subject.items():
-                self.student_dict[student_name][subject_name] = subject_score
+            self.student_dict[student_name] = subject
         self.store_student_file()
         return {'status': 'OK'}
 
