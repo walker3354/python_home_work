@@ -34,28 +34,20 @@ class SocketServer(Thread):
 
     def receive_message_from_client(self, connection, address):
         keep_going = True
-        while keep_going:
-            try:
-                message = connection.recv(1024).strip().decode()
-            except Exception as e:
-                print("Exeption happened {}, {}".format(e, address))
-                keep_going = False
-            else:
-                if not message:
-                    keep_going = False
-                return_value = Parser(message, address).parse_raw_message()
-                connection.send(return_value.encode())
-                '''
-                message = json.loads(message)
-                if message['command'] == "close":
-                    connection.send("closing".encode())
+        try:
+            while keep_going:
+                try:
+                    message = connection.recv(1024).strip().decode()
+                except Exception as e:
+                    print("Exeption happened {}, {}".format(e, address))
                     keep_going = False
                 else:
-                    print(message)
-                    reply_msg = "receive {}".format(message['command'])
-                    connection.send(reply_msg.encode())
-                '''
-
+                    if not message:
+                        keep_going = False
+                    return_value = Parser(message, address).parse_raw_message()
+                    connection.send(return_value.encode())
+        except:
+            pass
         connection.close()
         print("{} close connection".format(address))
 
