@@ -1,0 +1,48 @@
+ryanpan@RyanPanPC /Volumes/MyWorks/D_Data/teaching/110/Python/week 10.sqlite_contextManager_listComprehension/quiz/server$ python3 main_server.py
+('127.0.0.1', 58661) connected
+{"command": "show", "parameters": {}}
+    server received: {'command': 'show', 'parameters': {}} from ('127.0.0.1', 58661)
+{"command": "query", "parameters": {"name": "Test1"}}
+    server received: {'command': 'query', 'parameters': {'name': 'Test1'}} from ('127.0.0.1', 58661)
+{"command": "add", "parameters": {"name": "Test1", "scores": {"English": 99.0, "Chinese": 88.0}}}
+    server received: {'command': 'add', 'parameters': {'name': 'Test1', 'scores': {'English': 99.0, 'Chinese': 88.0}}} from ('127.0.0.1', 58661)
+{"command": "show", "parameters": {}}
+    server received: {'command': 'show', 'parameters': {}} from ('127.0.0.1', 58661)
+{"command": "query", "parameters": {"name": "Test2"}}
+    server received: {'command': 'query', 'parameters': {'name': 'Test2'}} from ('127.0.0.1', 58661)
+{"command": "add", "parameters": {"name": "Test2", "scores": {"Python": 11.0}}}
+    server received: {'command': 'add', 'parameters': {'name': 'Test2', 'scores': {'Python': 11.0}}} from ('127.0.0.1', 58661)
+{"command": "show", "parameters": {}}
+    server received: {'command': 'show', 'parameters': {}} from ('127.0.0.1', 58661)
+{"command": "query", "parameters": {"name": "Test2"}}
+    server received: {'command': 'query', 'parameters': {'name': 'Test2'}} from ('127.0.0.1', 58661)
+    Query Test2 success
+{"command": "modify", "parameters": {"name": "Test2", "scores_dict": {"Python": 11.0, "Eng": 100.0}}}
+    server received: {'command': 'modify', 'parameters': {'name': 'Test2', 'scores_dict': {'Python': 11.0, 'Eng': 100.0}}} from ('127.0.0.1', 58661)
+    Modify Test2 success
+{"command": "show", "parameters": {}}
+    server received: {'command': 'show', 'parameters': {}} from ('127.0.0.1', 58661)
+{"command": "query", "parameters": {"name": "Test3"}}
+    server received: {'command': 'query', 'parameters': {'name': 'Test3'}} from ('127.0.0.1', 58661)
+{"command": "query", "parameters": {"name": "Test2"}}
+    server received: {'command': 'query', 'parameters': {'name': 'Test2'}} from ('127.0.0.1', 58661)
+    Query Test2 success
+{"command": "modify", "parameters": {"name": "Test2", "scores_dict": {"Python": 19.0, "Eng": 100.0}}}
+    server received: {'command': 'modify', 'parameters': {'name': 'Test2', 'scores_dict': {'Python': 19.0, 'Eng': 100.0}}} from ('127.0.0.1', 58661)
+    Modify Test2 success
+{"command": "show", "parameters": {}}
+    server received: {'command': 'show', 'parameters': {}} from ('127.0.0.1', 58661)
+{"command": "query", "parameters": {"name": "Test2"}}
+    server received: {'command': 'query', 'parameters': {'name': 'Test2'}} from ('127.0.0.1', 58661)
+    Query Test2 success
+{"command": "delete", "parameters": {"name": "Test2"}}
+    server received: {'command': 'delete', 'parameters': {'name': 'Test2'}} from ('127.0.0.1', 58661)
+    Del Test2 success
+
+('127.0.0.1', 58661) close connection
+finish
+leaving ....... 
+ryanpan@RyanPanPC /Volumes/MyWorks/D_Data/teaching/110/Python/week 10.sqlite_contextManager_listComprehension/quiz/server$ python3 main_server.py
+('127.0.0.1', 58673) connected
+{"command": "show", "parameters": {}}
+    server received: {'command': 'show', 'parameters': {}} from ('127.0.0.1', 58673)

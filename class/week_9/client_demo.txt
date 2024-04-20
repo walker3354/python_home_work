@@ -1,0 +1,205 @@
+ryanpan@Ryan-Mac-mini-M2 client % python3 main_client.py
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: add
+  Please input a student's name: Test1
+    The client sent data => {'command': 'query', 'parameters': {'name': 'Test1'}}
+    The client received data => {'status': 'Fail', 'reason': 'The name is not found.'}
+  Please input a subject name or exit for ending: English
+  Please input Test1's English score or < 0 for discarding the subject: 99
+  Please input a subject name or exit for ending: Chinese
+  Please input Test1's Chinese score or < 0 for discarding the subject: 88
+  Please input a subject name or exit for ending: exit
+    The client sent data => {'command': 'add', 'parameters': {'name': 'Test1', 'scores': {'English': 99.0, 'Chinese': 88.0}}}
+    The client received data => {'status': 'OK'}
+    Add {'name': 'Test1', 'scores': {'English': 99.0, 'Chinese': 88.0}} success
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: show
+    The client sent data => {'command': 'show', 'parameters': {}}
+    The client received data => {'status': 'OK', 'parameters': {'Test1': {'name': 'Test1', 'scores': {'English': 99.0, 'Chinese': 88.0}}}}
+
+==== student list ====
+
+Name: Test1
+  subject: English, score: 99.0
+  subject: Chinese, score: 88.0
+
+======================
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: add
+  Please input a student's name: Test2
+    The client sent data => {'command': 'query', 'parameters': {'name': 'Test2'}}
+    The client received data => {'status': 'Fail', 'reason': 'The name is not found.'}
+  Please input a subject name or exit for ending: Python
+  Please input Test2's Python score or < 0 for discarding the subject: 11
+  Please input a subject name or exit for ending: exit
+    The client sent data => {'command': 'add', 'parameters': {'name': 'Test2', 'scores': {'Python': 11.0}}}
+    The client received data => {'status': 'OK'}
+    Add {'name': 'Test2', 'scores': {'Python': 11.0}} success
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: show
+    The client sent data => {'command': 'show', 'parameters': {}}
+    The client received data => {'status': 'OK', 'parameters': {'Test1': {'name': 'Test1', 'scores': {'English': 99.0, 'Chinese': 88.0}}, 'Test2': {'name': 'Test2', 'scores': {'Python': 11.0}}}}
+
+==== student list ====
+
+Name: Test1
+  subject: English, score: 99.0
+  subject: Chinese, score: 88.0
+
+Name: Test2
+  subject: Python, score: 11.0
+
+======================
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: modify
+  Please input a student's name: Test2
+    The client sent data => {'command': 'query', 'parameters': {'name': 'Test2'}}
+    The client received data => {'status': 'OK', 'scores': {'Python': 11.0}}
+  current subjects are Python 
+
+  Please input a subject you want to change: Eng
+  Add a new subject for Test2 please input Eng score or < 0 for discarding the subject: 100
+    The client sent data => {'command': 'modify', 'parameters': {'name': 'Test2', 'scores_dict': {'Python': 11.0, 'Eng': 100.0}}}
+    The client received data => {'status': 'OK'}
+    Add [Test2, Eng, 100.0] success
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: show
+    The client sent data => {'command': 'show', 'parameters': {}}
+    The client received data => {'status': 'OK', 'parameters': {'Test1': {'name': 'Test1', 'scores': {'English': 99.0, 'Chinese': 88.0}}, 'Test2': {'name': 'Test2', 'scores': {'Python': 11.0, 'Eng': 100.0}}}}
+
+==== student list ====
+
+Name: Test1
+  subject: English, score: 99.0
+  subject: Chinese, score: 88.0
+
+Name: Test2
+  subject: Python, score: 11.0
+  subject: Eng, score: 100.0
+
+======================
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: modify
+  Please input a student's name: Test3
+    The client sent data => {'command': 'query', 'parameters': {'name': 'Test3'}}
+    The client received data => {'status': 'Fail', 'reason': 'The name is not found.'}
+    The name Test3 is not found
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: modify
+  Please input a student's name: Test2
+    The client sent data => {'command': 'query', 'parameters': {'name': 'Test2'}}
+    The client received data => {'status': 'OK', 'scores': {'Python': 11.0, 'Eng': 100.0}}
+  current subjects are Python Eng 
+
+  Please input a subject you want to change: Python
+  Please input Python's new score of Test2: 19
+    The client sent data => {'command': 'modify', 'parameters': {'name': 'Test2', 'scores_dict': {'Python': 19.0, 'Eng': 100.0}}}
+    The client received data => {'status': 'OK'}
+    Modify [Test2, Python, 19.0] success
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: show
+    The client sent data => {'command': 'show', 'parameters': {}}
+    The client received data => {'status': 'OK', 'parameters': {'Test1': {'name': 'Test1', 'scores': {'English': 99.0, 'Chinese': 88.0}}, 'Test2': {'name': 'Test2', 'scores': {'Python': 19.0, 'Eng': 100.0}}}}
+
+==== student list ====
+
+Name: Test1
+  subject: English, score: 99.0
+  subject: Chinese, score: 88.0
+
+Name: Test2
+  subject: Python, score: 19.0
+  subject: Eng, score: 100.0
+
+======================
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: del
+  Please input a student's name: Test2
+    The client sent data => {'command': 'query', 'parameters': {'name': 'Test2'}}
+    The client received data => {'status': 'OK', 'scores': {'Python': 19.0, 'Eng': 100.0}}
+  Confirm to delete (y/n): y
+    The client sent data => {'command': 'delete', 'parameters': {'name': 'Test2'}}
+    The client received data => {'status': 'OK'}
+    Delete success
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: exit
+ryanpan@Ryan-Mac-mini-M2 client % python3 main_client.py
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: show
+    The client sent data => {'command': 'show', 'parameters': {}}
+    The client received data => {'status': 'OK', 'parameters': {'Test1': {'name': 'Test1', 'scores': {'English': 99.0, 'Chinese': 88.0}}}}
+
+==== student list ====
+
+Name: Test1
+  subject: English, score: 99.0
+  subject: Chinese, score: 88.0
+
+======================
+
+add: Add a student's name and score
+del: Delete a student
+modify: Modify a student's score
+show: Print all
+exit: Exit
+Please select: 
