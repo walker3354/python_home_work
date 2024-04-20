@@ -16,13 +16,3 @@ class PrintAll:
                 print('   subject: {},score:{}'.format(index_2, value_2))
             print()
         print("======================")
-
-    '''
-    def show_student_subject(self, student_name):
-        print('  current subjects are', end="")
-        studen_subject = list()
-        for subject in self.student_dict[student_name].keys():
-            print(f"{subject} ")
-            studen_subject.append(subject)
-        return studen_subject
-    '''
