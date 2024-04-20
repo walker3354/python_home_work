@@ -3,8 +3,9 @@ from Socket_client import Socket_client
 
 class AddStu:
     def __init__(self):
-        self.parameters = {'name': "", 'score': {}}
+        self.parameters = {'name': "", 'scores': {}}
         self.socket = Socket_client()
+        self.execute()
 
     def execute(self):
         self.input_student_name()
@@ -14,8 +15,15 @@ class AddStu:
         student_name = input("Please input a student's name or exit: ")
         if student_name == 'exit':
             return
-        self.parameters['name'] = student_name
-        self.input_subject()
+        if self.check_student_name():
+            self.parameters['name'] = student_name
+            self.input_subject()
+
+    def check_student_name(self, name):
+        self.socket.send_command('query', {'name': name})
+        if self.socket.wait_response()['status'] == 'Fail':
+            return True
+        return False
 
     def input_subject(self):
         while True:
@@ -33,7 +41,7 @@ class AddStu:
                     input("Please input {}'s {} score or < 0 for discarding the subject: ".format(self.parameters['name'], subject_name)))
                 if subject_score < 0:
                     break
-                self.parameters['score'][subject_name] = subject_score
+                self.parameters['scores'][subject_name] = subject_score
                 break
             except Exception as e:
                 print(e)

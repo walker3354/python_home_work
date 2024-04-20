@@ -5,8 +5,7 @@ from Socket_client import Socket_client
 
 class StdMenu:
     def __init__(self):
-        self.action_list = {
-            "add": AddStu, "show": PrintAll}
+        self.action_list = {"add": AddStu, "show": PrintAll().execute}
 
     def print_menu(self):
         print()
