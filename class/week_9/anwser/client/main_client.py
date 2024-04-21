@@ -2,15 +2,17 @@ from AddStu import AddStu
 from PrintAll import PrintAll
 from ModifyStu import ModifyStu
 from DelStu import DelStu
+from Socket_client import Socket_client
 
 
 class StdMenu:
     def __init__(self):
+        self.socket = Socket_client()
         self.action_list = {
-            "add": AddStu().execute,
-            "show": PrintAll().execute,
-            "modify": ModifyStu().execute,
-            "del": DelStu().execute,
+            "add": AddStu,
+            "show": PrintAll,
+            "modify": ModifyStu,
+            "del": DelStu,
         }
 
     def print_menu(self):
@@ -28,7 +30,7 @@ class StdMenu:
         while select_result != "exit":
             select_result = self.print_menu()
             try:
-                self.action_list[select_result]()
+                self.action_list[select_result](self.socket).execute()
             except Exception as e:
                 print(f"{e} please try again!")
 

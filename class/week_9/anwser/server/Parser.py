@@ -7,7 +7,10 @@ class Parser:
         self.message = json.loads(raw_message)
         self.client_address = address
         self.act_list = {'add': Std_storage(self.message['parameters']).add,
-                        'show': Std_storage().show,'query':Std_storage()}
+                        'show': Std_storage().show,
+                        'query':Std_storage(self.message['parameters']).query,
+                        'delete':Std_storage(self.message['parameters']).delete,
+                        'modify':Std_storage(self.message['parameters']).modify}
 
     def parse_raw_message(self):
         print(self.message)

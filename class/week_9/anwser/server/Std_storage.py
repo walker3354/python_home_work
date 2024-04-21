@@ -11,8 +11,7 @@ class Std_storage:
         try:
             with open("student_dict.db", "rb") as fp:
                 self.student_dict = pickle.load(fp)
-        except Exception as e:
-            print(f"Error occur {e}")
+        except:
             pass
 
     def store_student_file(self):
@@ -20,13 +19,13 @@ class Std_storage:
             pickle.dump(self.student_dict, fp)
 
     def add(self):
-        self.read_studet_file()
-        student_name = self.parameters["name"]
-        if student_name in self.student_dict.keys():
-            return {"status": "Fail", "reason": "The name already exists."}
-        else:
-            self.student_dict[student_name] = self.parameters["score"]
-        self.store_student_file()
+        try:
+            self.read_studet_file()
+            student_name = self.parameters["name"]
+            self.student_dict[student_name] = self.parameters["scores"]
+            self.store_student_file()
+        except Exception as e:
+            print(e)
         return {"status": "OK"}
 
     def show(self):
@@ -34,18 +33,15 @@ class Std_storage:
         return_message = {"status": "OK", "parameters": {}}
         if len(self.student_dict) != 0:
             for student_name, student_subject in self.student_dict.items():
-                return_message["parameters"].update(
-                    {student_name: {"name": student_name, "score": student_subject}}
-                )
+                return_message["parameters"].update({student_name: {"name": student_name, "scores": student_subject}})
         return return_message
 
     def query(self):
         self.read_studet_file()
         if self.parameters["name"] in self.student_dict.keys():
-            return {
-                "status": "OK",
-                "scores": self.student_dict[self.parameters["name"]],
-            }
+            return {"status": "OK","scores": self.student_dict[self.parameters["name"]]}
+        else:
+            return {"status": "Fail", "reason": "student no find"}
 
     def modify(self):
         self.read_studet_file()
@@ -58,3 +54,5 @@ class Std_storage:
         self.read_studet_file()
         del self.student_dict[self.parameters['name']]
         print(f'Del {self.parameters['name']} success')
+        self.store_student_file()
+        return {'status':'OK'}

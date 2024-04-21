@@ -1,10 +1,7 @@
-from Socket_client import Socket_client
-
-
 class PrintAll:
 
-    def __init__(self):
-        self.socket = Socket_client()
+    def __init__(self, socket):
+        self.socket = socket
         self.socket.send_command("show", {})
         self.student_dict = self.socket.wait_response()["parameters"]
 

@@ -1,10 +1,6 @@
-from Socket_client import Socket_client
-
-
 class DelStu:
-
-    def __init__(self):
-        self.socket = Socket_client()
+    def __init__(self, socket):
+        self.socket = socket
         self.student_name = ""
 
     def execute(self):

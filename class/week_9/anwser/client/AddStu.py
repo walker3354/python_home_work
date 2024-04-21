@@ -1,10 +1,7 @@
-from Socket_client import Socket_client
-
-
 class AddStu:
-    def __init__(self):
+    def __init__(self , socket):
         self.parameters = {"name": "", "scores": {}}
-        self.socket = Socket_client()
+        self.socket = socket
 
     def execute(self):
         self.input_student_name()
@@ -14,7 +11,7 @@ class AddStu:
         student_name = input("Please input a student's name or exit: ")
         if student_name == "exit":
             return
-        if self.check_student_name():
+        if self.check_student_name(student_name):
             self.parameters["name"] = student_name
             self.input_subject()
 
