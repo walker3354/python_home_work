@@ -35,13 +35,7 @@ class AddStu:
     def input_subject_score(self, subject_name):
         while True:
             try:
-                subject_score = int(
-                    input(
-                        "Please input {}'s {} score or < 0 for discarding the subject: ".format(
-                            self.parameters["name"], subject_name
-                        )
-                    )
-                )
+                subject_score = int(input(f"Please input {self.parameters["name"]}'s {subject_name} score or < 0 for discarding the subject: "))
                 if subject_score < 0:
                     break
                 self.parameters["scores"][subject_name] = subject_score

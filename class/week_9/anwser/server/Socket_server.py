@@ -3,16 +3,11 @@ import socket
 from Parser import Parser
 
 
-host = "127.0.0.1"
-port = 20001
-
-
 class SocketServer(Thread):
     def __init__(self, host, port):
         super().__init__()
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.server_socket.setsockopt(
-            socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.server_socket.bind((host, port))
         self.server_socket.listen(5)
 
@@ -23,14 +18,14 @@ class SocketServer(Thread):
         while True:
             connection, address = self.server_socket.accept()
             print("{} connected".format(address))
-            self.new_connection(connection=connection,
-                                address=address)
+            self.new_connection(connection=connection, address=address)
 
     def new_connection(self, connection, address):
-        Thread(target=self.receive_message_from_client,
-               kwargs={
-                   "connection": connection,
-                   "address": address}, daemon=True).start()
+        Thread(
+            target=self.receive_message_from_client,
+            kwargs={"connection": connection, "address": address},
+            daemon=True,
+        ).start()
 
     def receive_message_from_client(self, connection, address):
         keep_going = True
@@ -50,16 +45,3 @@ class SocketServer(Thread):
             pass
         connection.close()
         print("{} close connection".format(address))
-
-
-if __name__ == '__main__':
-    server = SocketServer(host, port)
-    server.daemon = True
-    server.serve()
-    while True:
-        command = input()
-        if command == "finish":
-            break
-
-    server.server_socket.close()
-    print("leaving ....... ")
