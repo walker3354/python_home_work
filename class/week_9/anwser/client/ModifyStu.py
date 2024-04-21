@@ -5,6 +5,10 @@ class ModifyStu:
     def __init__(self):
         self.student_name = ''
         self.socket = Socket_client()
+        self.socket_receive_data = False
+
+    def execute(self):
+        self.input_student_name()
 
     def check_student_name(self):
         self.socket.send_command('query', {'name': self.student_name})
@@ -17,33 +21,38 @@ class ModifyStu:
         student_name = input("Please input a student's name or exit: ")
         if student_name == 'exit':
             return
-        subject_list = self.check_student_name()
-        if subject_list != False:
-            self.modify_student_subject(subject_list)
+        self.socket_receive_data = self.check_student_name()
+        if self.socket_receive_data != False:
+            self.modify_student_subject()
 
-    def modify_student_subject(self, return_data):
+    def show_student_subject(self):
         print("current subjects are ", end="")
-        for subject in return_data['scores'].keys():
+        for subject in self.socket_receive_data['scores'].keys():
             print(f"{subject} ", end="")
 
+    def input_subject_name(self):
+        self.show_student_subject()
         while True:
-            changed_subject = input(
-                "\nPlease input a subject you want to change: ")
-            if changed_subject in return_data['scores']:
+            changed_subject = input("\nPlease input a subject you want to change: ")
+            if changed_subject in self.socket_receive_data['scores']:
                 break
             print("input input subject error please try again")
-
+        self.input_subject_name(changed_subject)
+        
+    def input_subject_score(self,subject_name):
         while True:
             try:
-                subject_new_score = int(input(f"Add a new subject for Test2 please input {
-                                        changed_subject} score or < 0 for discarding the subject: "))
+                subject_score = int(input(f"Add a new subject for Test2 please input {subject_name} 
+                                              score or < 0 for discarding the subject: "))
                 break
             except Exception as e:
                 print(e)
-
-        return_data['scores'][changed_subject] = subject_new_score
-        self.socket.send_command(
-            'modify', {'name': self.student_name, 'scores_dict': return_data['scores']})
+        self.send_modify_data(subject_name,subject_score)
+    
+    def send_modify_data(self,subject_name,subject_score):
+        self.socket_receive_data['scores'][subject_name] = subject_score
+        self.socket.send_command('modify', {'name': self.student_name, 'scores_dict': self.socket_receive_data['scores']})
         if self.socket.wait_response()['status'] == 'OK':
-            print(f"Add [{self.student_name} , {
-                  changed_subject} , {subject_new_score} success")
+            print(f"Add [{self.student_name} , {subject_name} , {subject_score}] success")
+        else:
+            print(f"Add [{self.student_name} , {subject_name} , {subject_score}] fail")
