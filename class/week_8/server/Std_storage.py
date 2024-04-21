@@ -32,9 +32,7 @@ class Std_storage:
     def show(self):
         self.read_studet_file()
         return_message = {'status': 'OK', 'parameters': {}}
-        if not self.student_dict:
-            return_message['parameters'] = {}
-        else:
+        if len(self.student_dict) != 0:
             for student_name, student_subject in self.student_dict.items():
                 return_message['parameters'].update(
                     {student_name: {'name': student_name, "score": student_subject}})

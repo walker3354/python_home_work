@@ -7,6 +7,9 @@ class DelStu:
         self.socket = Socket_client()
         self.student_name = ""
 
+    def execute(self):
+        self.input_student_name()
+
     def check_student_name(self):
         self.socket.send_command("query", {"name": self.student_name})
         if self.socket.wait_response()["status"] == "OK":

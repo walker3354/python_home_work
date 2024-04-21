@@ -1,7 +1,7 @@
 from AddStu import AddStu
 from PrintAll import PrintAll
 from ModifyStu import ModifyStu
-from Socket_client import Socket_client
+from DelStu import DelStu
 
 
 class StdMenu:
@@ -10,6 +10,7 @@ class StdMenu:
             "add": AddStu().execute,
             "show": PrintAll().execute,
             "modify": ModifyStu().execute,
+            "del": DelStu().execute,
         }
 
     def print_menu(self):
