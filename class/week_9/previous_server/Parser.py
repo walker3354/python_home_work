@@ -1,4 +1,4 @@
-from StudentManage import StudentManage
+from Std_storage import Std_storage
 import json
 
 
@@ -6,11 +6,11 @@ class Parser:
     def __init__(self, raw_message, address):
         self.message = json.loads(raw_message)
         self.client_address = address
-        self.act_list = {'show':StudentManage().show,
-                         'query':StudentManage(self.message['parameters']).query,
-                         'add':StudentManage(self.message['parameters']).add,
-                         'modify':StudentManage(self.message['parameters']).modify,
-                         'delete':StudentManage(self.message['parameters']).delete}
+        self.act_list = {'add': Std_storage(self.message['parameters']).add,
+                        'show': Std_storage().show,
+                        'query':Std_storage(self.message['parameters']).query,
+                        'delete':Std_storage(self.message['parameters']).delete,
+                        'modify':Std_storage(self.message['parameters']).modify}
 
     def parse_raw_message(self):
         print(self.message)
