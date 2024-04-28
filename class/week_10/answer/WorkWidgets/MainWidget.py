@@ -8,11 +8,35 @@ class MainWidget(QtWidgets.QWidget):
         super().__init__()
         self.setObjectName("main_widget")
 
-        layout = QtWidgets.QVBoxLayout()
+        self.layout = QtWidgets.QVBoxLayout()
         header_label = LabelComponent(24, "Student Management System")
-        add_stu_widget = AddStuWidget()
+        self.add_stu_widget = AddStuWidget()
 
-        layout.addWidget(header_label, stretch=15)
-        layout.addWidget(add_stu_widget, stretch=85)
+        self.layout.addWidget(header_label, stretch=15)
+        self.layout.addWidget(self.add_stu_widget, stretch=85)
+        self.button_init()
+        self.student_dict = {"name": "", "score": {}}
+        self.setLayout(self.layout)
 
-        self.setLayout(layout)
+    def button_init(self):
+        self.add_stu_widget.query_button.clicked.connect(self.query)
+        self.add_stu_widget.add_button.clicked.connect(self.add)
+        self.add_stu_widget.send_button.clicked.connect(self.send)
+
+    def query(self):
+        self.add_stu_widget.current_info.setText("student no found")
+
+    def add(self):
+        student_name = self.add_stu_widget.name_editor_label.text()
+        subject = self.add_stu_widget.subject_editor_label.text()
+        score = self.add_stu_widget.score_editor_label.text()
+        self.student_dict["name"] = student_name
+        self.student_dict["score"].update({subject: score})
+        self.add_stu_widget.current_info.setText(
+            f"add name:{student_name} {subject} {score}"
+        )
+
+    def send(self):
+        self.add_stu_widget.current_info.setText(f"The information {self.student_dict}")
+        self.student_dict.clear()
+        self.student_dict = {"name": "", "score": {}}

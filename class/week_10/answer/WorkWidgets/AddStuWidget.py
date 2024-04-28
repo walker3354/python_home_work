@@ -1,4 +1,5 @@
 from PyQt6 import QtWidgets, QtCore
+from PyQt6.QtGui import QIntValidator
 from WorkWidgets.WidgetComponents import (
     LabelComponent,
     LineEditComponent,
@@ -10,6 +11,7 @@ class AddStuWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
         self.layout = QtWidgets.QGridLayout()
+        self.current_info = LabelComponent(16, "")
         self.header_label = LabelComponent(20, "Add Student")
         self.name_label = LabelComponent(
             18, "Name: ", QtCore.Qt.AlignmentFlag.AlignRight
@@ -29,12 +31,14 @@ class AddStuWidget(QtWidgets.QWidget):
         self.add_button = ButtonComponent("Add")
         self.send_button = ButtonComponent("Send")
 
-        self.query_button.clicked.connect(self.confirm_action)
         self.set_components_pos()
         self.set_layout_grid()
+        self.set_buttons_init_status()
+        self.set_lineEdits_init_status()
         self.setLayout(self.layout)
 
     def set_components_pos(self):
+        self.layout.addWidget(self.current_info, 0, 3, 1, 2)
         # (component,pos_row,pos_column,take_row,take_column)
         self.layout.addWidget(self.header_label, 0, 0, 1, 2)
         self.layout.addWidget(self.name_label, 1, 0, 1, 1)
@@ -62,5 +66,12 @@ class AddStuWidget(QtWidgets.QWidget):
         self.layout.setRowStretch(4, 4)
         self.layout.setRowStretch(5, 1)
 
-    def confirm_action(self):
-        print(self.name_editor_label.text())
+    def set_buttons_init_status(self):
+        self.add_button.setEnabled(False)
+        self.send_button.setEnabled(False)
+
+    def set_lineEdits_init_status(self):
+        self.subject_editor_label.setEnabled(False)
+        self.score_editor_label.setEnabled(False)
+        self.score_editor_label.setMaxLength(3)
+        self.score_editor_label.setValidator(QIntValidator())
