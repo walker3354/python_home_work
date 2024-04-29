@@ -2,10 +2,13 @@ from PyQt6 import QtWidgets, QtCore, QtGui
 
 
 class LabelComponent(QtWidgets.QLabel):
-    def __init__(self, font_size, content, align=QtCore.Qt.AlignmentFlag.AlignLeft):
+    def __init__(
+        self, font_size, content, align=QtCore.Qt.AlignmentFlag.AlignLeft, color="white"
+    ):
         super().__init__()
         self.setWordWrap(True)
         self.setAlignment(align)
+        self.setStyleSheet(f"color: {color};")
         self.setFont(QtGui.QFont("Arial", pointSize=font_size, weight=500))
         self.setText(content)
 

@@ -11,7 +11,7 @@ class AddStuWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
         self.layout = QtWidgets.QGridLayout()
-        self.current_info = LabelComponent(16, "")
+        self.current_info = LabelComponent(16, "", color="red")
         self.header_label = LabelComponent(20, "Add Student")
         self.name_label = LabelComponent(
             18, "Name: ", QtCore.Qt.AlignmentFlag.AlignRight

@@ -24,7 +24,9 @@ class MainWidget(QtWidgets.QWidget):
         self.add_stu_widget.send_button.clicked.connect(self.send)
 
     def query(self):
-        self.add_stu_widget.current_info.setText("student no found")
+        self.add_stu_widget.current_info.setText("SQL student no found")
+        self.set_editor_useable(True)
+        self.add_stu_widget.add_button.setEnabled(True)
 
     def add(self):
         student_name = self.add_stu_widget.name_editor_label.text()
@@ -35,8 +37,16 @@ class MainWidget(QtWidgets.QWidget):
         self.add_stu_widget.current_info.setText(
             f"add name:{student_name} {subject} {score}"
         )
+        self.set_editor_useable(False)
+        self.add_stu_widget.add_button.setEnabled(False)
+        self.add_stu_widget.send_button.setEnabled(True)
 
     def send(self):
         self.add_stu_widget.current_info.setText(f"The information {self.student_dict}")
         self.student_dict.clear()
         self.student_dict = {"name": "", "score": {}}
+        self.add_stu_widget.send_button.setEnabled(False)
+
+    def set_editor_useable(self, status):
+        self.add_stu_widget.subject_editor_label.setEnabled(status)
+        self.add_stu_widget.score_editor_label.setEnabled(status)
