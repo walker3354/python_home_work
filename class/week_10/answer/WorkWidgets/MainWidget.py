@@ -7,15 +7,15 @@ class MainWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
         self.setObjectName("main_widget")
-
+        self.student_dict = {"name": "", "scores": {}}
         self.layout = QtWidgets.QVBoxLayout()
         header_label = LabelComponent(24, "Student Management System")
         self.add_stu_widget = AddStuWidget()
 
         self.layout.addWidget(header_label, stretch=15)
         self.layout.addWidget(self.add_stu_widget, stretch=85)
+
         self.button_init()
-        self.student_dict = {"name": "", "score": {}}
         self.setLayout(self.layout)
 
     def button_init(self):
@@ -43,8 +43,9 @@ class MainWidget(QtWidgets.QWidget):
 
     def send(self):
         self.add_stu_widget.current_info.setText(f"The information {self.student_dict}")
+        print(self.student_dict)
         self.student_dict.clear()
-        self.student_dict = {"name": "", "score": {}}
+        self.student_dict = {"name": "", "scores": {}}
         self.add_stu_widget.send_button.setEnabled(False)
 
     def set_editor_useable(self, status):

@@ -15,6 +15,5 @@ if __name__ == "__main__":
         command = input()
         if command == "finish":
             break
-
     server.server_socket.close()
     print("leaving ....... ")

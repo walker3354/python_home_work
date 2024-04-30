@@ -16,8 +16,7 @@ class StdMenu:
         }
 
     def print_menu(self):
-        print()
-        print("add: Add a student's name and score")
+        print("\nadd: Add a student's name and score")
         print("del: Delete a student")
         print("modify: Modify a student's score")
         print("show: Print all")

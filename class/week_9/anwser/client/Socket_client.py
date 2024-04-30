@@ -1,5 +1,6 @@
 import socket
 import json
+
 BUFFER_SIZE = 1940
 
 host = "127.0.0.1"
@@ -13,13 +14,13 @@ class Socket_client:
         self.client_socket.connect((host, port))
 
     def send_command(self, command, parameters):
-        send_data = {'command': command, 'parameters': parameters}
-        print(f"The client sent data => ('command': '{
-              command}'), ('parameters': {parameters})")
+        send_data = {"command": command, "parameters": parameters}
+        print(
+            f"The client sent data => ('command': '{command}'), ('parameters': {parameters})"
+        )
         self.client_socket.send(json.dumps(send_data).encode())
 
     def wait_response(self):
-        data = self.client_socket.recv(BUFFER_SIZE)
-        raw_data = json.loads(data.decode())
+        raw_data = json.loads(self.client_socket.recv(BUFFER_SIZE).decode())
         print(f"The client received data => {raw_data}")
         return raw_data
