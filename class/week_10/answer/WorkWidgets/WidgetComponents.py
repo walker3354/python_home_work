@@ -3,7 +3,7 @@ from PyQt6 import QtWidgets, QtCore, QtGui
 
 class LabelComponent(QtWidgets.QLabel):
     def __init__(
-        self, font_size, content, align=QtCore.Qt.AlignmentFlag.AlignLeft, color=""
+        self, font_size, content, align=QtCore.Qt.AlignmentFlag.AlignRight, color=""
     ):
         super().__init__()
         self.setWordWrap(True)

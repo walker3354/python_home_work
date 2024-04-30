@@ -1,4 +1,4 @@
-from PyQt6 import QtWidgets, QtCore
+from PyQt6 import QtWidgets
 from PyQt6.QtGui import QIntValidator
 from WorkWidgets.WidgetComponents import (
     LabelComponent,
@@ -10,18 +10,14 @@ from WorkWidgets.WidgetComponents import (
 class AddStuWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
+        self.student_dict = {"name": "", "scores": {}}
+
         self.layout = QtWidgets.QGridLayout()
         self.current_info = LabelComponent(16, "", color="red")
         self.header_label = LabelComponent(20, "Add Student")
-        self.name_label = LabelComponent(
-            18, "Name: ", QtCore.Qt.AlignmentFlag.AlignRight
-        )
-        self.subject_label = LabelComponent(
-            16, "Subject: ", QtCore.Qt.AlignmentFlag.AlignRight
-        )
-        self.score_label = LabelComponent(
-            18, "Score: ", QtCore.Qt.AlignmentFlag.AlignRight
-        )
+        self.name_label = LabelComponent(18, "Name: ")
+        self.subject_label = LabelComponent(16, "Subject: ")
+        self.score_label = LabelComponent(18, "Score: ")
 
         self.name_editor_label = LineEditComponent("Name")
         self.subject_editor_label = LineEditComponent("Subject")
@@ -69,9 +65,39 @@ class AddStuWidget(QtWidgets.QWidget):
     def set_buttons_init_status(self):
         self.add_button.setEnabled(False)
         self.send_button.setEnabled(False)
+        self.query_button.clicked.connect(self.query)
+        self.add_button.clicked.connect(self.add)
+        self.send_button.clicked.connect(self.send)
 
     def set_lineEdits_init_status(self):
         self.subject_editor_label.setEnabled(False)
         self.score_editor_label.setEnabled(False)
         self.score_editor_label.setMaxLength(3)
         self.score_editor_label.setValidator(QIntValidator())
+
+    def set_editor_useable(self, status):
+        self.subject_editor_label.setEnabled(status)
+        self.score_editor_label.setEnabled(status)
+
+    def query(self):
+        self.current_info.setText("SQL student no found")
+        self.set_editor_useable(True)
+        self.add_button.setEnabled(True)
+
+    def add(self):
+        student_name = self.name_editor_label.text()
+        subject = self.subject_editor_label.text()
+        score = self.score_editor_label.text()
+        self.student_dict["name"] = student_name
+        self.student_dict["scores"].update({subject: score})
+        self.current_info.setText(f"add name:{student_name} {subject} {score}")
+        self.add_button.setEnabled(True)
+        self.send_button.setEnabled(True)
+
+    def send(self):
+        self.current_info.setText(f"The information {self.student_dict}")
+        print(self.student_dict)
+        self.student_dict.clear()
+        self.student_dict = {"name": "", "scores": {}}
+        self.set_editor_useable(False)
+        self.send_button.setEnabled(False)
