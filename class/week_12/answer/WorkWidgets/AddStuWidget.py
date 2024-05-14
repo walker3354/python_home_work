@@ -94,6 +94,8 @@ class AddStuWidget(QtWidgets.QWidget):
             self.set_editor_useable(True)
             self.add_button.setEnabled(True)
         else:
+            self.set_editor_useable(False)
+            self.add_button.setEnabled(False)
             self.current_info.setText("student already exsist")
 
     def add(self):
@@ -108,16 +110,17 @@ class AddStuWidget(QtWidgets.QWidget):
 
     def send(self):
         self.send_result = Execute("add", self.client_socket, self.student_dict)
-        self.send_result.run()
-        self.send_result.return_sig.connect(self.send_process)
+        self.send_result.start()
+        self.send_result.return_sig.connect(self.process_send)
 
-    def send_process(self, result):
+    def process_send(self, result):
         if result["status"] == "OK":
             self.current_info.setText(f"The information {self.student_dict}")
         else:
             self.current_info.setText(f"Add Fail")
         self.student_dict = {"name": "", "scores": {}}
         self.set_editor_useable(False)
+        self.add_button.setEnabled(False)
         self.send_button.setEnabled(False)
 
 
