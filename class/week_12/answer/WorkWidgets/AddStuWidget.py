@@ -1,4 +1,5 @@
-from PyQt6 import QtWidgets
+from PyQt6 import QtWidgets, QtCore
+from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtGui import QIntValidator
 from WorkWidgets.WidgetComponents import (
     LabelComponent,
@@ -8,8 +9,9 @@ from WorkWidgets.WidgetComponents import (
 
 
 class AddStuWidget(QtWidgets.QWidget):
-    def __init__(self):
+    def __init__(self, client_scoket):
         super().__init__()
+        self.client_socket = client_scoket
         self.student_dict = {"name": "", "scores": {}}
 
         self.layout = QtWidgets.QGridLayout()
@@ -80,9 +82,19 @@ class AddStuWidget(QtWidgets.QWidget):
         self.score_editor_label.setEnabled(status)
 
     def query(self):
-        self.current_info.setText("SQL student no found")
-        self.set_editor_useable(True)
-        self.add_button.setEnabled(True)
+        self.query_result = Execute(
+            "query", self.client_socket, {"name": self.name_editor_label.text()}
+        )
+        self.query_result.start()
+        self.query_result.return_sig.connect(self.process_query)
+
+    def process_query(self, result):
+        if result["status"] == "Fail":
+            self.current_info.setText("SQL student no found")
+            self.set_editor_useable(True)
+            self.add_button.setEnabled(True)
+        else:
+            self.current_info.setText("student already exsist")
 
     def add(self):
         student_name = self.name_editor_label.text()
@@ -95,9 +107,31 @@ class AddStuWidget(QtWidgets.QWidget):
         self.send_button.setEnabled(True)
 
     def send(self):
-        self.current_info.setText(f"The information {self.student_dict}")
-        print(self.student_dict)
-        self.student_dict.clear()
+        self.send_result = Execute("add", self.client_socket, self.student_dict)
+        self.send_result.run()
+        self.send_result.return_sig.connect(self.send_process)
+
+    def send_process(self, result):
+        if result["status"] == "OK":
+            self.current_info.setText(f"The information {self.student_dict}")
+        else:
+            self.current_info.setText(f"Add Fail")
         self.student_dict = {"name": "", "scores": {}}
         self.set_editor_useable(False)
         self.send_button.setEnabled(False)
+
+
+class Execute(QtCore.QThread):
+    return_sig = pyqtSignal(dict)
+
+    def __init__(self, command, client_socket, parameters):
+        super().__init__()
+        self.command = command
+        self.client_socket = client_socket
+        self.parameters = parameters
+
+    def run(self):
+        self.client_socket.send_command(self.command, self.parameters)
+        response = self.client_socket.wait_response()
+        print(response)
+        self.return_sig.emit(response)
