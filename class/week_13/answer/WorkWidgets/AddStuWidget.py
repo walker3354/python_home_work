@@ -16,7 +16,9 @@ class AddStuWidget(QtWidgets.QWidget):
 
         self.layout = QtWidgets.QGridLayout()
         self.current_info = LabelComponent(16, "", color="red")
-        self.header_label = LabelComponent(20, "Add Student")
+        self.header_label = LabelComponent(
+            20, "Add Student", QtCore.Qt.AlignmentFlag.AlignLeft
+        )
         self.name_label = LabelComponent(18, "Name: ")
         self.subject_label = LabelComponent(16, "Subject: ")
         self.score_label = LabelComponent(18, "Score: ")
@@ -122,6 +124,9 @@ class AddStuWidget(QtWidgets.QWidget):
         self.set_editor_useable(False)
         self.add_button.setEnabled(False)
         self.send_button.setEnabled(False)
+
+    def show_current_widget(self):
+        print("now using Add widget")
 
 
 class Execute(QtCore.QThread):
