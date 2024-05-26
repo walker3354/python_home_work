@@ -1,33 +1,28 @@
 from PyQt6 import QtWidgets, QtCore
 from WorkWidgets.AddStuWidget import AddStuWidget
 from WorkWidgets.ShowStuWidget import ShowStuWidget
+from WorkWidgets.MenuWidget import MenuWidget
 from WorkWidgets.WidgetComponents import LabelComponent, ButtonComponent
 
 
 class MainWidget(QtWidgets.QWidget):
-    def __init__(self, client_socket):
+    def __init__(self):
         super().__init__()
-        self.setObjectName("main_widget")
         self.layout = QtWidgets.QGridLayout()
 
-        header_label = LabelComponent(
-            24, "Student Management System", QtCore.Qt.AlignmentFlag.AlignLeft
-        )
-        function_widget = FunctionWidget(client_socket)
-        menu_widget = MenuWidget(function_widget.update_widget)
+        header_label = LabelComponent(24, "Student Management System", color="black")
+        menu_layer = MenuWidget()
+        self.layout.addWidget(header_label, 0, 0)
+        self.layout.addWidget(menu_layer, 1, 0)
 
-        self.layout.addWidget(header_label, 0, 0, 1, 2)
-        self.layout.addWidget(menu_widget, 1, 0, 1, 1)
-        self.layout.addWidget(function_widget, 1, 1, 1, 1)
-
-        self.layout.setColumnStretch(0, 1)
-        self.layout.setColumnStretch(1, 6)
-        self.layout.setRowStretch(0, 1)
-        self.layout.setRowStretch(1, 6)
-
+        # 設定比例
+        self.layout.setRowStretch(0, 2)  # header 占 2 份
+        self.layout.setRowStretch(1, 8)  # menu 占 8 份
         self.setLayout(self.layout)
+        print("main widget init")
 
 
+"""
 class MenuWidget(QtWidgets.QWidget):
     def __init__(self, update_widget_callback):
         super().__init__()
@@ -59,3 +54,4 @@ class FunctionWidget(QtWidgets.QStackedWidget):
         self.setCurrentIndex(self.widget_dict[name])
         current_widget = self.currentWidget()
         current_widget.selected()
+"""
