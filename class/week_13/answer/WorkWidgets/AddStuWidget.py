@@ -126,5 +126,5 @@ class AddStuWidget(QtWidgets.QWidget):
         self.add_button.setEnabled(False)
         self.send_button.setEnabled(False)
 
-    def show_current_widget(self):
+    def selected(self):
         print("now using Add widget")

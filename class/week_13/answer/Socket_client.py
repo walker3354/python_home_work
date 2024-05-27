@@ -1,5 +1,6 @@
 import socket
 import json
+import time
 
 BUFFER_SIZE = 1940
 
@@ -11,7 +12,13 @@ class Socket_client:
 
     def __init__(self, host=host, port=port):
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.client_socket.connect((host, port))
+        while True:
+            try:
+                self.client_socket.connect((host, port))
+                break
+            except Exception as e:
+                print(f"error occur {e}, Retry")
+                time.sleep(5)
 
     def send_command(self, command, parameters):
         send_data = {"command": command, "parameters": parameters}

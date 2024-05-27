@@ -19,13 +19,13 @@ class ShowStuWidget(QtWidgets.QWidget):
             20, "Show Student", align=QtCore.Qt.AlignmentFlag.AlignLeft
         )
 
-        self.fetch_all_student_data()
-
         self.layout.addWidget(self.header_label, stretch=1)
         self.layout.addWidget(self.textedit, stretch=4)
+
         self.setLayout(self.layout)
 
-    def show_current_widget(self):
+    def selected(self):
+        self.fetch_all_student_data()
         print("now using Show widget")
 
     def fetch_all_student_data(self):

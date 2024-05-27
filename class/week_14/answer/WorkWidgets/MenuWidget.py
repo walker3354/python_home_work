@@ -1,6 +1,7 @@
 from PyQt6 import QtWidgets, QtCore
 from PyQt6.QtCore import pyqtSignal
 from WorkWidgets.WidgetComponents import ButtonComponent
+from WorkWidgets.HomeWidget import HomeWidget
 
 
 class MenuWidget(QtWidgets.QWidget):
@@ -10,9 +11,10 @@ class MenuWidget(QtWidgets.QWidget):
     modifyClicked = QtCore.pyqtSignal()
     deleteClicked = QtCore.pyqtSignal()
 
-    def __init__(self):
+    def __init__(self, update_widget_callback):
         super().__init__()
         self.layout = QtWidgets.QHBoxLayout()
+        self.update_widget = update_widget_callback
 
         self.empty_button1 = ButtonComponent("")
         self.empty_button2 = ButtonComponent("")
@@ -31,7 +33,6 @@ class MenuWidget(QtWidgets.QWidget):
         self.layout.setSpacing(0)
         self.layout.setContentsMargins(0, 0, 0, 0)
 
-        self.setStyleSheet("QWidget { background-color: white; }")
         self.buttons_clicked_connect()
         self.setLayout(self.layout)
 
