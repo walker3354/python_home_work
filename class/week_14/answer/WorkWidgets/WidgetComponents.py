@@ -3,7 +3,7 @@ from PyQt6.QtCore import pyqtSignal, Qt
 
 
 class LabelComponent(QtWidgets.QLabel):
-    def __init__(self, font_size, content, color="black"):
+    def __init__(self, font_size, content, color="black", font="Arial"):
         super().__init__()
         self.setWordWrap(True)
         self.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -12,7 +12,7 @@ class LabelComponent(QtWidgets.QLabel):
         elif color == "white":
             self.setStyleSheet(f"background-color: black; color: white;")
 
-        self.setFont(QtGui.QFont("Arial", pointSize=font_size, weight=500))
+        self.setFont(QtGui.QFont(font, pointSize=font_size, weight=500))
         self.setText(content)
 
 
@@ -34,5 +34,7 @@ class ButtonComponent(QtWidgets.QPushButton):
     def __init__(self, text, font_size=16, background_color="black"):
         super().__init__()
         self.setText(text)
+        self.setFixedSize(200, 100)
+        self.setContentsMargins(0, 0, 0, 0)
         self.setFont(QtGui.QFont("Arial", font_size))
         self.setStyleSheet(f"background-color: {background_color}; color: white;")

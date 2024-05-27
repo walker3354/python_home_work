@@ -10,6 +10,6 @@ if __name__ == "__main__":
     socket_client = Socket_client(host=host, port=port)
     app = QApplication([])
     main_window = MainWidget()
-    main_window.setFixedSize(750, 450)
+    main_window.setFixedSize(1200, 800)
     main_window.show()
     sys.exit(app.exec())

@@ -16,8 +16,12 @@ class MainWidget(QtWidgets.QWidget):
         self.layout.addWidget(menu_layer, 1, 0)
 
         # 設定比例
-        self.layout.setRowStretch(0, 2)  # header 占 2 份
-        self.layout.setRowStretch(1, 8)  # menu 占 8 份
+        self.layout.setRowStretch(0, 1)
+        self.layout.setRowStretch(1, 1)
+        self.layout.setRowStretch(2, 6)
+
+        self.layout.setSpacing(0)
+        self.layout.setContentsMargins(0, 0, 0, 0)
         self.setLayout(self.layout)
         print("main widget init")
 
