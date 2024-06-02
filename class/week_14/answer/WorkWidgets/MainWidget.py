@@ -1,9 +1,13 @@
 from PyQt6 import QtWidgets, QtCore
 from WorkWidgets.MenuWidget import MenuWidget
 from WorkWidgets.HomeWidget import HomeWidget
+from WorkWidgets.AddWidget import AddWidget
+from WorkWidgets.ShowWidget import ShowWidget
+from WorkWidgets.DeleteWidget import DeleteWidget
 from WorkWidgets.WidgetComponents import LabelComponent, ButtonComponent
 
 
+# allocate size: 150*800
 class MainWidget(QtWidgets.QWidget):
     def __init__(self, client_socket):
         super().__init__()
@@ -47,6 +51,9 @@ class FunctionWidget(QtWidgets.QStackedWidget):
         super().__init__()
         self.Widget_dict = {
             "home": self.addWidget(HomeWidget()),
+            "add": self.addWidget(AddWidget(client_socket)),
+            "show": self.addWidget(ShowWidget(client_socket)),
+            "delete": self.addWidget(DeleteWidget(client_socket)),
         }
         self.update_widget("home")
 

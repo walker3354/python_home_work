@@ -4,6 +4,7 @@ from WorkWidgets.WidgetComponents import ButtonComponent
 from WorkWidgets.HomeWidget import HomeWidget
 
 
+# allocate size: 150*800
 class MenuWidget(QtWidgets.QWidget):
 
     addClicked = QtCore.pyqtSignal()
@@ -23,6 +24,10 @@ class MenuWidget(QtWidgets.QWidget):
         self.modify_button = ButtonComponent("Modify")
         self.del_button = ButtonComponent("Delete")
 
+        self.initial_components()
+        self.setLayout(self.layout)
+
+    def initial_components(self):
         self.layout.addWidget(self.empty_button1, stretch=1)
         self.layout.addWidget(self.add_button, stretch=1)
         self.layout.addWidget(self.show_button, stretch=1)
@@ -34,7 +39,6 @@ class MenuWidget(QtWidgets.QWidget):
         self.layout.setContentsMargins(0, 0, 0, 0)
 
         self.buttons_clicked_connect()
-        self.setLayout(self.layout)
 
     def buttons_clicked_connect(self):
         self.add_button.clicked.connect(self.add_label_clicked)
@@ -52,22 +56,21 @@ class MenuWidget(QtWidgets.QWidget):
         self.refresh_color()
         self.add_button.setStyleSheet("background-color: gray; color: white;")
         self.addClicked.emit()
-        print("add")
+        self.update_widget("add")
 
     def show_label_clicked(self):
         self.refresh_color()
         self.show_button.setStyleSheet("background-color: gray; color: white;")
         self.showClicked.emit()
-        print("show")
+        self.update_widget("show")
 
     def modify_label_clicked(self):
         self.refresh_color()
         self.modify_button.setStyleSheet("background-color: gray; color: white;")
         self.modifyClicked.emit()
-        print("modify")
 
     def del_label_clicked(self):
         self.refresh_color()
         self.del_button.setStyleSheet("background-color: gray; color: white;")
         self.deleteClicked.emit()
-        print("del")
+        self.update_widget("delete")

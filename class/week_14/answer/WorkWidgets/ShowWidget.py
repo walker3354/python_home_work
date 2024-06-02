@@ -1,44 +1,45 @@
-from PyQt6 import QtWidgets, QtCore
+from PyQt6 import QtWidgets
 from WorkWidgets.Execute import Execute
-from WorkWidgets.WidgetComponents import (
-    LabelComponent,
-    LineEditComponent,
-    ButtonComponent,
-)
+from WorkWidgets.WidgetComponents import LabelComponent, TextEditComponent
 
 
-class ShowStuWidget(QtWidgets.QWidget):
+# allocate size: 1200*800
+class ShowWidget(QtWidgets.QWidget):
+
     def __init__(self, client_socket):
         super().__init__()
         self.client_socket = client_socket
-        self.setObjectName("show_stu_widget")
-        self.layout = QtWidgets.QVBoxLayout()
+        self.layout = QtWidgets.QGridLayout()
 
-        self.textedit = QtWidgets.QTextEdit()
-        self.header_label = LabelComponent(
-            20, "Show Student", align=QtCore.Qt.AlignmentFlag.AlignLeft
-        )
+        self.blank_label = LabelComponent(20, "", "black")
+        self.message_board = TextEditComponent("")
 
-        self.layout.addWidget(self.header_label, stretch=1)
-        self.layout.addWidget(self.textedit, stretch=4)
-
+        self.initial_components()
         self.setLayout(self.layout)
 
-    def selected(self):
+    def load(self):
         self.fetch_all_student_data()
-        print("now using Show widget")
+        print("Show Function")
+
+    def initial_components(self):
+        for i in range(10):
+            self.layout.setRowStretch(i, 1)
+            self.layout.setColumnStretch(i, 1)
+        self.layout.setSpacing(0)
+        self.layout.setContentsMargins(0, 0, 0, 0)
+
+        self.layout.addWidget(self.blank_label, 0, 0, 10, 10)
+        self.layout.addWidget(self.message_board, 1, 1, 9, 8)
+
+        self.message_board.resize(810, 500)
 
     def fetch_all_student_data(self):
         self.send_result = Execute("show", self.client_socket, {})
         self.send_result.start()
         self.send_result.return_sig.connect(self.set_textedit_contain)
-        """
-        self.client_socket.send_command("show", {})
-        self.student_dict = self.client_socket.wait_response()["parameters"]
-        """
 
     def set_textedit_contain(self, respones_data):
-        self.textedit.clear()
+        self.message_board.clear()
         student_dict = respones_data["parameters"]
         display_text = "\n==== student list ====\n"
         for index_1, value_1 in student_dict.items():
@@ -47,5 +48,4 @@ class ShowStuWidget(QtWidgets.QWidget):
                 display_text += f"   subject: {index_2},score:{value_2}\n"
             display_text += "\n"
         display_text += "======================"
-        self.textedit.setText(display_text)
-        self.textedit.setReadOnly(True)
+        self.message_board.set_message(display_text)

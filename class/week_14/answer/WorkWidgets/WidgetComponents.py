@@ -17,13 +17,23 @@ class LabelComponent(QtWidgets.QLabel):
 
 
 class LineEditComponent(QtWidgets.QLineEdit):
-    def __init__(self, default_content="", length=10, width=250, font_size=16):
+    def __init__(self, default_content="", length=20, width=500, font_size=20):
         super().__init__()
         self.setMaxLength(length)
         self.setText(default_content)
-        self.setMinimumHeight(30)
+        self.setMinimumHeight(100)
         self.setMaximumWidth(width)
         self.setFont(QtGui.QFont("Arial", font_size))
+        self.setStyleSheet(
+            """
+            QLineEdit {
+                background-color: white;
+                color: black;
+                border: 5px solid black;
+                padding: 5px;
+            }
+        """
+        )
         self.mousePressEvent = self.clear_editor_content
 
     def clear_editor_content(self, event):
@@ -37,4 +47,76 @@ class ButtonComponent(QtWidgets.QPushButton):
         self.setFixedSize(200, 100)
         self.setContentsMargins(0, 0, 0, 0)
         self.setFont(QtGui.QFont("Arial", font_size))
-        self.setStyleSheet(f"background-color: {background_color}; color: white;")
+        self.setStyleSheet(
+            f"""
+            QPushButton {{
+                background-color: {background_color};
+                color: white;
+                border-radius: 15px;
+            }}
+            """
+        )
+
+
+class TextEditComponent(QtWidgets.QTextEdit):
+    def __init__(self, font="", font_size=20, width=750, height=160):
+        super().__init__()
+        self.setText(f"{font}")
+        self.setFixedSize(width, height)
+        self.setFont(QtGui.QFont(font, font_size))
+        self.setReadOnly(True)
+        self.setStyleSheet(
+            """
+            QLineEdit {
+                background-color: gary;
+                color: black;
+                border: 5px solid black;
+                padding: 5px;
+            }
+        """
+        )
+
+    def set_message(self, message):
+        self.setText(f"system message:\n{message}")
+        self.setReadOnly(True)
+        self.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+    def resize(self, width, height):
+        self.setFixedSize(width, height)
+        self.update()
+
+
+class ComboBoxComponent(QtWidgets.QComboBox):
+
+    def __init__(self):
+        super().__init__()
+        self.setStyleSheet(
+            """
+            QComboBox {
+                background-color: white;
+                color: black;
+                border: 5px solid black;
+                padding: 5px;
+            }
+        """
+        )
+        self.setFixedSize(500, 100)
+        self.setFont(QtGui.QFont("Arial", 20))
+
+
+class MessageBoxComponent(QtWidgets.QMessageBox):
+    def __init__(self, message):
+        super().__init__()
+        self.setText(message)
+        self.result = False
+        result = QtWidgets.QMessageBox.question(
+            self,
+            "Question",
+            message,
+            QtWidgets.QMessageBox.StandardButton.Yes
+            | QtWidgets.QMessageBox.StandardButton.No,
+        )
+        if result == QtWidgets.QMessageBox.StandardButton.Yes:
+            self.result = True
+        else:
+            self.result = False
