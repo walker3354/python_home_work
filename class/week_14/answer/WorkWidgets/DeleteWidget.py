@@ -57,8 +57,8 @@ class DeleteWidget(QtWidgets.QWidget):
     def insert_all_student_name(self, respones_data):
         self.student_data = respones_data["parameters"]
         self.student_name_list = list(respones_data["parameters"].keys())
+        self.delete_combo_box.clear()
         self.delete_combo_box.addItems(self.student_name_list)
-        print(self.student_name_list)
 
     def confirm_delete_student(self):
         confirm_result = MessageBoxComponent("Are you sure to delete this student?")

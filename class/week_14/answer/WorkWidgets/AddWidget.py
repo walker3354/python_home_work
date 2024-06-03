@@ -27,7 +27,7 @@ class AddWidget(QtWidgets.QWidget):
 
         self.name_editor = LineEditComponent("student name")
         self.subject_editor = LineEditComponent("subject name")
-        self.score_editor = LineEditComponent("subject score")
+        self.score_editor = LineEditComponent("000")
 
         self.query_button = ButtonComponent("Query")
         self.query_button.setFixedSize(180, 100)

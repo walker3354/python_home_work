@@ -4,6 +4,7 @@ from WorkWidgets.HomeWidget import HomeWidget
 from WorkWidgets.AddWidget import AddWidget
 from WorkWidgets.ShowWidget import ShowWidget
 from WorkWidgets.DeleteWidget import DeleteWidget
+from WorkWidgets.ModifyWidget import ModifyWidget
 from WorkWidgets.WidgetComponents import LabelComponent, ButtonComponent
 
 
@@ -54,6 +55,7 @@ class FunctionWidget(QtWidgets.QStackedWidget):
             "add": self.addWidget(AddWidget(client_socket)),
             "show": self.addWidget(ShowWidget(client_socket)),
             "delete": self.addWidget(DeleteWidget(client_socket)),
+            "modify": self.addWidget(ModifyWidget(client_socket)),
         }
         self.update_widget("home")
 

@@ -68,6 +68,7 @@ class MenuWidget(QtWidgets.QWidget):
         self.refresh_color()
         self.modify_button.setStyleSheet("background-color: gray; color: white;")
         self.modifyClicked.emit()
+        self.update_widget("modify")
 
     def del_label_clicked(self):
         self.refresh_color()
