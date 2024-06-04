@@ -81,7 +81,7 @@ class DeleteWidget(QtWidgets.QWidget):
             for subject, score in self.student_data[self.student_name][
                 "scores"
             ].items():
-                display_text += f"subject : {subject}\n score : {score}\n"
+                display_text += f"subject : {subject}\tscore : {score}\n"
         self.message_board.set_message(display_text)
         self.delete_combo_box.clear()
         self.fetch_all_student_name()

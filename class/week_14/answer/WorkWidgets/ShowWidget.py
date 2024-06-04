@@ -41,11 +41,11 @@ class ShowWidget(QtWidgets.QWidget):
     def set_textedit_contain(self, respones_data):
         self.message_board.clear()
         student_dict = respones_data["parameters"]
-        display_text = "\n==== student list ====\n"
+        display_text = "\n==== student list =======\n"
         for index_1, value_1 in student_dict.items():
             display_text += f"Name:{index_1}\n"
             for index_2, value_2 in value_1["scores"].items():
-                display_text += f"   subject: {index_2},score:{value_2}\n"
+                display_text += f"   subject: {index_2}  score:{value_2}\n"
             display_text += "\n"
         display_text += "======================"
         self.message_board.set_message(display_text)

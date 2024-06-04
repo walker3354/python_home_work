@@ -67,9 +67,17 @@ class AddWidget(QtWidgets.QWidget):
         self.score_editor.setMaxLength(3)
         self.score_editor.setValidator(QIntValidator(0, 100))
 
+        self.score_editor.set_Enable(False)
+        self.subject_editor.set_Enable(False)
+
+        self.add_button.set_Enable(False)
+        self.send_button.set_Enable(False)
+
         self.query_button.clicked.connect(self.query)
         self.add_button.clicked.connect(self.add)
         self.send_button.clicked.connect(self.send)
+
+        self.name_editor.textChanged.connect(self.disable_add_function)
 
     def query(self):
         message_pack = {"name": self.name_editor.text()}
@@ -80,11 +88,24 @@ class AddWidget(QtWidgets.QWidget):
     def process_query(self, result):
         name = self.name_editor.text()
         if result["status"] == "Fail":
+            self.score_editor.set_Enable(True)
+            self.subject_editor.set_Enable(True)
+            self.add_button.set_Enable(True)
+            self.send_button.set_Enable(True)
             self.message_board.set_message(f"{name} not exsist")
         else:
             self.message_board.set_message(f"{name} exsist")
 
+    def disable_add_function(self):
+        self.add_button.set_Enable(False)
+        self.send_button.set_Enable(False)
+        self.subject_editor.set_Enable(True)
+        self.score_editor.set_Enable(True)
+
     def add(self):
+        self.query_button.set_Enable(False)
+        self.name_editor.set_Enable(False)
+
         student_name = self.name_editor.text()
         subject = self.subject_editor.text()
         score = self.score_editor.text()
@@ -105,3 +126,10 @@ class AddWidget(QtWidgets.QWidget):
         else:
             self.message_board.set_message(f"Add Fail")
         self.student_dict = {"name": "", "scores": {}}
+
+        self.name_editor.set_Enable(True)
+        self.query_button.set_Enable(True)
+        self.add_button.set_Enable(False)
+        self.send_button.set_Enable(False)
+        self.subject_editor.set_Enable(False)
+        self.score_editor.set_Enable(False)

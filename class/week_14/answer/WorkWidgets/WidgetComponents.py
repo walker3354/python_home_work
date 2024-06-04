@@ -36,6 +36,32 @@ class LineEditComponent(QtWidgets.QLineEdit):
         )
         self.mousePressEvent = self.clear_editor_content
 
+    def set_Enable(self, enable):
+        if enable == False:
+            self.setReadOnly(True)
+            self.setStyleSheet(
+                """
+            QLineEdit {
+                background-color: white;
+                color: gray;
+                border: 5px solid black;
+                padding: 5px;
+            }
+        """
+            )
+        else:
+            self.setReadOnly(False)
+            self.setStyleSheet(
+                """
+            QLineEdit {
+                background-color: white;
+                color: black;
+                border: 5px solid black;
+                padding: 5px;
+            }
+        """
+            )
+
     def clear_editor_content(self, event):
         self.clear()
 
@@ -56,6 +82,30 @@ class ButtonComponent(QtWidgets.QPushButton):
             }}
             """
         )
+
+    def set_Enable(self, enable):
+        if enable == False:
+            self.setEnabled(False)
+            self.setStyleSheet(
+                f"""
+                QPushButton {{
+                    background-color: gray;
+                    color: white;
+                    border-radius: 15px;
+                }}
+                """
+            )
+        else:
+            self.setEnabled(True)
+            self.setStyleSheet(
+                f"""
+                QPushButton {{
+                    background-color: black;
+                    color: white;
+                    border-radius: 15px;
+                }}
+                """
+            )
 
 
 class TextEditComponent(QtWidgets.QTextEdit):
@@ -102,6 +152,32 @@ class ComboBoxComponent(QtWidgets.QComboBox):
         )
         self.setFixedSize(500, 100)
         self.setFont(QtGui.QFont("Arial", 20))
+
+    def set_Enable(self, enable):
+        if enable == False:
+            self.setEnabled(False)
+            self.setStyleSheet(
+                """
+                QComboBox {
+                    background-color: gray;
+                    color: white;
+                    border: 5px solid black;
+                    padding: 5px;
+                }
+            """
+            )
+        else:
+            self.setEnabled(True)
+            self.setStyleSheet(
+                """
+                QComboBox {
+                    background-color: white;
+                    color: black;
+                    border: 5px solid black;
+                    padding: 5px;
+                }
+            """
+            )
 
 
 class MessageBoxComponent(QtWidgets.QMessageBox):

@@ -81,10 +81,10 @@ class ModifyWidget(QtWidgets.QWidget):
 
     @pyqtSlot()
     def change_student(self):
-        current_name = self.name_combo_box.currentText()
         self.subject_combo_box.addItems(
             list(self.student_data[self.student_name_list[0]]["scores"].keys())
         )
+        current_name = self.name_combo_box.currentText()
         if current_name == "":
             return
         self.subject_combo_box.clear()
@@ -93,11 +93,12 @@ class ModifyWidget(QtWidgets.QWidget):
         )
 
     def modify_student_score(self):
-        self.name_combo_box.setDisabled(True)
+        if self.score_editor.text() == "":
+            return
+        self.name_combo_box.set_Enable(False)
         name = self.name_combo_box.currentText()
         subject = self.subject_combo_box.currentText()
         self.student_data[name]["scores"][subject] = self.score_editor.text()
-        print(self.student_data)
 
     def send(self):
         print("send")
@@ -113,7 +114,7 @@ class ModifyWidget(QtWidgets.QWidget):
         )
         self.send_result.start()
         self.send_result.return_sig.connect(self.process_send)
-        self.name_combo_box.setDisabled(False)
+        self.name_combo_box.set_Enable(True)
 
     def process_send(self, result):
         if result["status"] == "OK":
